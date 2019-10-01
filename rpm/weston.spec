@@ -190,12 +190,11 @@ XDG_RUNTIME_DIR="$PWD/xdg" make check || :;
 %files devel
 %defattr(-,root,root,-)
 %{_includedir}/*
-%{_libdir}/pkgconfig/weston-6.pc
+#%{_libdir}/pkgconfig/weston-6.pc
 %{_libdir}/pkgconfig/weston-desktop-6.pc
 %{_datadir}/pkgconfig/libweston-6-protocols.pc
 %{_datadir}/libweston/protocols/weston-debug.xml
 %doc %{_mandir}/man5/weston.ini.5.gz
 # >> files devel
 # << files devel
-
 
