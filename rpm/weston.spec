@@ -8,7 +8,6 @@ License:        MIT
 Group:          System/GUI/Other
 Url:            https://github.com/wayland-project/weston
 Source:         %name-%version.tar.xz
-#Patch1:         000_simple_clients_programs_LDADD.patch
 # libvpx-dev libva-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev freerdp2-dev curl python3-pip python3-setuptools
 BuildRequires:  pkgconfig(expat)
 BuildRequires:  libffi-devel
@@ -86,15 +85,17 @@ BuildRequires: libxxf86vm-dev
 #CXL##BuildRequires:  libvpx-devel
 #CXL##BuildRequires:  rsvg-view
 #CXL#BuildRequires:	xkeyboard-config
-#CXL#%if "%{with_cairo}" == "yes"
+%if "%{with_cairo}" == "yes"
 #CXL#BuildRequires:  pkgconfig(cairo-egl) >= 1.11.3
 #CXL#BuildRequires:	pkgconfig(cairo-xcb)
-#CXL#%endif
+%endif
 #CXL#BuildRequires:  pkgconfig(gio-2.0)
 #CXL##BuildRequires:  gfx-rpi-libGLESv2-devel
 #CXL#BuildRequires:  pkgconfig(libsystemd-login)
 #CXL#BuildRequires:  pkgconfig(poppler-glib)
 Requires:	xkeyboard-config
+
+%changelog
 
 %description
 Weston is the reference implementation of a Wayland compositor, and a
@@ -118,7 +119,6 @@ Weston SDK files
 
 %prep
 %setup -q -n %{name}-%{version}
-#%patch1 -p1
 
 %build
 cd upstream
@@ -172,14 +172,18 @@ mkdir -pm go-rwx xdg;
 # series."""
 XDG_RUNTIME_DIR="$PWD/xdg" make check || :;
 
+%post -p /sbin/ldconfig
+
+%postun -p /sbin/ldconfig
+
 %files
 %defattr(-,root,root)
 %{_bindir}/wcap-*
 %{_bindir}/weston*
 %{_libexecdir}/weston-*
 %{_libdir}/weston
-%{_libdir}/libweston-6.so*
-%{_libdir}/libweston-desktop-6.so*
+%{_libdir}/libweston-6.so.*
+%{_libdir}/libweston-desktop-6.so.*
 %{_libdir}/libweston-6/*-backend.so
 %{_datadir}/weston/*.png
 %{_datadir}/weston/wayland.svg
@@ -192,6 +196,8 @@ XDG_RUNTIME_DIR="$PWD/xdg" make check || :;
 %files devel
 %defattr(-,root,root,-)
 %{_includedir}/*
+%{_libdir}/libweston-6.so
+%{_libdir}/libweston-desktop-6.so
 %{_libdir}/pkgconfig/libweston-6.pc
 %{_libdir}/pkgconfig/libweston-desktop-6.pc
 %{_libdir}/pkgconfig/weston.pc
