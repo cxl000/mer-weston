@@ -157,10 +157,13 @@ cd upstream
 #	simple-dmabuf-drm=freedreno #, choices: [ auto, intel, freedreno, etnaviv ],
 #	xwayland-path=/usr/bin/Xwayland,
 %meson_build
+cd ..
 
 %install
+cd upstream
 %meson_install
 rm -f "%buildroot/%_libdir"/*.la "%buildroot/%_libdir/weston"/*.la;
+cd ..
 
 %check
 mkdir -pm go-rwx xdg;
