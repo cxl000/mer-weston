@@ -174,19 +174,26 @@ XDG_RUNTIME_DIR="$PWD/xdg" make check || :;
 
 %files
 %defattr(-,root,root)
-%_bindir/wcap-*
-%_bindir/weston*
-%_libexecdir/weston-*
-%_libdir/weston
-%_datadir/weston
-%_mandir/man1/weston.1*
-%_mandir/man7/weston*7*
+%{_bindir}/wcap-*
+%{_bindir}/weston*
+%{_libexecdir}/weston-*
+%{_libdir}/weston
+%{_libdir}/libweston-6.so*
+%{_libdir}/libweston-desktop-6.so*
+%{_libdir}/libweston-6/*-backend.so
+%{_datadir}/libweston
+%{_datadir}/wayland-sessions/weston.desktop
+%{_mandir}/man1/weston*.1*
+%{_mandir}/man7/weston*7*
 
 
 %files devel
 %defattr(-,root,root,-)
 %{_includedir}/*
-%{_libdir}/pkgconfig/weston.pc
+%{_libdir}/pkgconfig/weston-6.pc
+%{_libdir}/pkgconfig/weston-desktop-6.pc
+%{_datadir}/pkgconfig/libweston-6-protocols.pc
+%{_datadir}/libweston/protocols/weston-debug.xml
 %doc %{_mandir}/man5/weston.ini.5.gz
 # >> files devel
 # << files devel
