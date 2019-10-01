@@ -1,5 +1,5 @@
-%define with-cairo no
-%define with-xwayland no
+%define with_cairo no
+%define with_xwayland no
 Name:           weston
 Version:        6.0.1
 Release:        1
@@ -62,7 +62,7 @@ BuildRequires:  pkgconfig(libedit)
 #BuildRequires:  python3-mako                
 #BuildRequires:  libxfont-dev
 
-%if "%{with-xwayland}" == "yes"
+%if "%{with_xwayland}" == "yes"
 #libxcb-xkb-dev
 #libgdk-pixbuf2.0-dev libxcursor-dev
 #CXL#BuildRequires:	pkgconfig(xcursor)
@@ -86,7 +86,7 @@ BuildRequires: libxxf86vm-dev
 #CXL##BuildRequires:  libvpx-devel
 #CXL##BuildRequires:  rsvg-view
 #CXL#BuildRequires:	xkeyboard-config
-#CXL#%if "%{with-cairo}" == "yes"
+#CXL#%if "%{with_cairo}" == "yes"
 #CXL#BuildRequires:  pkgconfig(cairo-egl) >= 1.11.3
 #CXL#BuildRequires:	pkgconfig(cairo-xcb)
 #CXL#%endif
@@ -190,8 +190,8 @@ XDG_RUNTIME_DIR="$PWD/xdg" make check || :;
 %files devel
 %defattr(-,root,root,-)
 %{_includedir}/*
-#%{_libdir}/pkgconfig/weston-6.pc
-%{_libdir}/pkgconfig/weston-desktop-6.pc
+#\%{_libdir}/pkgconfig/weston-6.pc
+#\%{_libdir}/pkgconfig/weston-desktop-6.pc
 %{_datadir}/pkgconfig/libweston-6-protocols.pc
 %{_datadir}/libweston/protocols/weston-debug.xml
 %doc %{_mandir}/man5/weston.ini.5.gz
